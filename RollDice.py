@@ -6,6 +6,9 @@ Roll a fair six sided die
 """
 
 import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 random.seed(20)
 # face frequency counters
@@ -41,6 +44,16 @@ p3 = side3_Frequency / n * 100
 p4 = side4_Frequency / n * 100
 p5 = side5_Frequency / n * 100
 p6 = side6_Frequency / n * 100
+
+x = ["Side1", "Side2", "Side3", "Side4", "Side5", "Side6"]
+y = [side1_Frequency, side2_Frequency, side3_Frequency, side4_Frequency,
+     side5_Frequency, side6_Frequency]
+
+# plot the data
+sns.set_style('whitegrid')
+figure = plt.figure('Rolling a Six-Sided Die')
+sns.barplot(x, y)
+plt.show()
 
 print(f'Face{"Frequency":>13}{"%":>6}')
 print(f'{1:>4}{side1_Frequency:>13}{p1:>8.2f}')
