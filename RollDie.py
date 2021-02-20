@@ -45,14 +45,24 @@ p4 = side4_Frequency / n * 100
 p5 = side5_Frequency / n * 100
 p6 = side6_Frequency / n * 100
 
-x = ["Side1", "Side2", "Side3", "Side4", "Side5", "Side6"]
-y = [side1_Frequency, side2_Frequency, side3_Frequency, side4_Frequency,
-     side5_Frequency, side6_Frequency]
+xX = ["Side1", "Side2", "Side3", "Side4", "Side5", "Side6"]
+yY = [side1_Frequency, side2_Frequency, side3_Frequency, side4_Frequency,
+      side5_Frequency, side6_Frequency]
 
 # plot the data
 sns.set_style('whitegrid')
 figure = plt.figure('Rolling a Six-Sided Die')
-sns.barplot(x, y)
+axes = sns.barplot(x=xX, y=yY, palette='bright')
+axes.set_title(f'Die Frequencies for {sum(yY):,} Rolls')
+axes.set(xlabel='Die Value', ylabel='Frequency')
+axes.set_ylim(top=max(yY) * 1.10)  # scale y-axis by 10%
+# display frequency & percentage above each patch (bar)
+for bar, frequency in zip(axes.patches, yY):
+    text_x = bar.get_x() + bar.get_width() / 2.0
+    text_y = bar.get_height()
+    text = f'{frequency:,}\n{frequency / sum(yY):.3%}'
+    axes.text(text_x, text_y, text, ha='center', va='bottom')
+
 plt.show()
 
 print(f'Face{"Frequency":>13}{"%":>6}')
